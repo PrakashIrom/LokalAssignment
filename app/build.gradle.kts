@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
+    implementation("androidx.navigation:navigation-compose:2.8.7")
+   // implementation(libs.androidx.navigation.runtime.ktx)
     val ktor_version = "3.1.2"
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")

@@ -8,7 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.apui.lokalassignment.ui.home.JobListScreen
+import androidx.navigation.compose.rememberNavController
+import com.apui.lokalassignment.ui.navigation.AppNavHost
 import com.apui.lokalassignment.ui.theme.LokalAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,10 +19,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LokalAssignmentTheme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    JobListScreen(
-                        innerPadding = innerPadding
-                    )
+                    AppNavHost(navController, innerPadding)
                 }
             }
         }

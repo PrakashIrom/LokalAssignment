@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apui.lokalassignment.data.model.JobListResponse
+import com.apui.lokalassignment.data.model.JobResponse
 import com.apui.lokalassignment.domain.repository.JobRepository
 import kotlinx.coroutines.launch
 
@@ -21,17 +22,28 @@ class JobListViewModel(private val jobRepository: JobRepository) : ViewModel() {
     val jobState: JobStates
         get() = _jobState
 
+    var selectedJob: JobResponse? by mutableStateOf(null)
+        private set
+
     private var currentPage = 1
 
-    fun loadMorePage() {
+    init {
+        loadMorePage()
+    }
+
+    private fun loadMorePage() {
         viewModelScope.launch {
-            //_jobState = JobStates.Loading
+            _jobState = JobStates.Loading
             _jobState = try {
                 JobStates.Success(jobRepository.fetchJobs(currentPage))
             } catch (e: Exception) {
                 JobStates.Error(e.message.toString())
             }
         }
+    }
+
+    fun selectJob(job: JobResponse) {
+        selectedJob = job
     }
 
 }
