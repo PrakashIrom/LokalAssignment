@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.apui.lokalassignment.ui.bookmark.BookMarkDetailsScreen
 import com.apui.lokalassignment.ui.bookmark.BookMarkScreen
 import com.apui.lokalassignment.ui.home.JobListScreen
 import com.apui.lokalassignment.ui.jobdetail.JobDetailsScreen
@@ -19,7 +20,10 @@ fun AppNavHost(navController: NavHostController, innerPadding: PaddingValues) {
             JobDetailsScreen()
         }
         composable(Screen.Bookmarks.route) {
-            BookMarkScreen()
+            BookMarkScreen(navController = navController)
+        }
+        composable(Screen.BookmarkedJobDetails.route) {
+            BookMarkDetailsScreen()
         }
     }
 }

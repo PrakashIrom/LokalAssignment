@@ -4,10 +4,12 @@ sealed class Screen(val route: String = "", val title: String = "") {
     object Jobs : Screen(Screens.JOBS.name, "Jobs")
     object Bookmarks : Screen(Screens.BOOKMARKS.name, "Bookmarks")
     object JobDetails : Screen(Screens.JOB_DETAILS.name)
+    object BookmarkedJobDetails : Screen(Screens.BOOKMARKED_JOB_DETAILS.name)
 }
 
 enum class Screens {
     JOBS,
     BOOKMARKS,
-    JOB_DETAILS
+    JOB_DETAILS,
+    BOOKMARKED_JOB_DETAILS
 }

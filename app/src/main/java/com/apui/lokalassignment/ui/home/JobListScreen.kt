@@ -35,9 +35,7 @@ fun JobListScreen(
     innerPadding: PaddingValues,
     navController: NavHostController
 ) {
-    /*LaunchedEffect(Unit) {
-        jobListViewModel.loadMorePage()
-    }*/
+
     when (val response = jobListViewModel.jobState) {
         is JobStates.Error -> {
             Log.d("TAG", "JobListScreen: ${response.message}")

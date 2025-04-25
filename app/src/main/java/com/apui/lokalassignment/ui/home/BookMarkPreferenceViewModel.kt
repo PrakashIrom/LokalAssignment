@@ -13,8 +13,8 @@ class BookMarkPreferenceViewModel(
 ) : ViewModel() {
 
     private var _bookmarkedJobIds by mutableStateOf(setOf<Int>())
-    val bookmarkedJobIds: Set<Int>
-        get() = _bookmarkedJobIds
+    /*val bookmarkedJobIds: Set<Int>
+        get() = _bookmarkedJobIds  */
 
     init {
         viewModelScope.launch {
