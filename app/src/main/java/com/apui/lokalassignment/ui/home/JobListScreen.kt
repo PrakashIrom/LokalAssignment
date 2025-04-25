@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.apui.lokalassignment.data.model.JobResponse
+import com.apui.lokalassignment.ui.navigation.Screen
 import com.apui.lokalassignment.ui.navigation.Screens
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -66,7 +67,7 @@ fun JobList(
         items(jobList) { job ->
             JobItem(job, onClick = {
                 jobListViewModel.selectJob(job)
-                navController.navigate(Screens.JOB_DETAILS_SCREEN.name)
+                navController.navigate(Screen.JobDetails.route)
             })
         }
     }
