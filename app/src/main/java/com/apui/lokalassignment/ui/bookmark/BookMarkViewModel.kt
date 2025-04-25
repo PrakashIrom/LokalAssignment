@@ -18,7 +18,6 @@ class BookMarkViewModel(private val jobDBRepository: JobDBRepository) : ViewMode
     var selectedJob: JobEntity? by mutableStateOf(null)
         private set
 
-
     init {
         viewModelScope.launch {
             jobDBRepository.fetchJobs().collect {

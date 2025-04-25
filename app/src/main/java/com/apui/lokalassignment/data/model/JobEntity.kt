@@ -11,7 +11,6 @@ data class JobEntity(
     val salary: String? = "",
     val whatsapp_no: String? = "",
     val company_name: String? = "",
-    val salary_type: String? = "",
     val experience: String? = "",
     val qualification: String? = "",
     val job_type: String? = "",

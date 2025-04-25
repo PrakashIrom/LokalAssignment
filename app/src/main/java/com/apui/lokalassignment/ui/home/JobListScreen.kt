@@ -19,14 +19,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.apui.lokalassignment.R
+import com.apui.lokalassignment.data.model.JobEntity
 import com.apui.lokalassignment.data.model.JobResponse
+import com.apui.lokalassignment.ui.bookmark.BookMarkViewModel
 import com.apui.lokalassignment.ui.navigation.Screen
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -81,11 +85,13 @@ fun JobList(
 fun JobItem(
     job: JobResponse,
     onClick: () -> Unit,
-    bookMarkPreferenceViewModel: BookMarkPreferenceViewModel = koinViewModel()
+    bookMarkPreferenceViewModel: BookMarkPreferenceViewModel = koinViewModel(),
+    bookMarkViewModel: BookMarkViewModel = koinViewModel()
 ) {
     val isBookMarked = remember {
         derivedStateOf { job.id?.let { bookMarkPreferenceViewModel.isBookMarked(it) } ?: false }
     }
+    val coroutineScope = rememberCoroutineScope()
 
     Card(modifier = Modifier
         .padding(10.dp)
@@ -117,6 +123,28 @@ fun JobItem(
                     .size(24.dp)
                     .padding(start = 8.dp)
                     .clickable {
+                        coroutineScope.launch {
+                            val jobEntity = JobEntity(
+                                title = job.title.toString(),
+                                place = job.primary_details?.Place.toString(),
+                                salary = job.primary_details?.Salary.toString(),
+                                whatsapp_no = job.whatsapp_no.toString(),
+                                company_name = job.company_name.toString(),
+                                experience = job.primary_details?.Experience.toString(),
+                                qualification = job.primary_details?.Qualification.toString(),
+                                job_type = job.primary_details?.Job_Type.toString(),
+                                job_role = job.job_role.toString(),
+                                shift = job.contentV3?.V3?.find { it.field_key == "Shift timing" }?.field_value.toString(),
+                                gender = job.contentV3?.V3?.find { it.field_key == "Gender" }?.field_value,
+                                description = job.contentV3?.V3?.find { it.field_key == "Other details" }?.field_value
+                            )
+
+                            if (isBookMarked.value) {
+                                bookMarkViewModel.deleteJob(jobEntity)
+                            } else {
+                                bookMarkViewModel.insertJob(jobEntity)
+                            }
+                        }
                         job.id?.let { bookMarkPreferenceViewModel.toggleBookmark(it) }
                     }
             )
