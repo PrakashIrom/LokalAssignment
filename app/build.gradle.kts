@@ -41,8 +41,11 @@ android {
 }
 
 dependencies {
+    implementation("androidx.datastore:datastore-preferences:1.1.3")
+    implementation("androidx.datastore:datastore-preferences-core:1.1.3")
+
     implementation("androidx.navigation:navigation-compose:2.8.7")
-   // implementation(libs.androidx.navigation.runtime.ktx)
+
     val ktor_version = "3.1.2"
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
@@ -51,6 +54,7 @@ dependencies {
     implementation("io.insert-koin:koin-compose-viewmodel:4.0.1")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
