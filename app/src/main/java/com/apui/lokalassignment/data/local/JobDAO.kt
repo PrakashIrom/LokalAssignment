@@ -17,6 +17,6 @@ interface JobDAO {
     suspend fun insertJob(job: JobEntity)
 
     @Delete
-    suspend fun deleteJob(task: JobEntity)
+    suspend fun deleteJob(job: JobEntity)
 
 }

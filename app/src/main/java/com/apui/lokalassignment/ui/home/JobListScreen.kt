@@ -32,6 +32,7 @@ import com.apui.lokalassignment.ui.bookmark.BookMarkViewModel
 import com.apui.lokalassignment.ui.navigation.Screen
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
+import java.util.UUID
 
 @Composable
 fun JobListScreen(
@@ -125,6 +126,9 @@ fun JobItem(
                     .clickable {
                         coroutineScope.launch {
                             val jobEntity = JobEntity(
+                                id = (job.id ?: UUID
+                                    .randomUUID()
+                                    .toString()).toString(),
                                 title = job.title.toString(),
                                 place = job.primary_details?.Place.toString(),
                                 salary = job.primary_details?.Salary.toString(),
