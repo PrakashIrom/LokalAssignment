@@ -2,6 +2,7 @@ package com.apui.lokalassignment.ui.bookmark
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,12 +15,12 @@ import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun BookMarkDetailsScreen(viewModel: BookMarkViewModel = koinViewModel()) {
+fun BookMarkDetailsScreen(viewModel: BookMarkViewModel = koinViewModel(), innerPadding: PaddingValues) {
     val bookmarkedJob = viewModel.selectedJob
 
     Column(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(innerPadding)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally

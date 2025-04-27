@@ -14,7 +14,7 @@ class JobRemoteDataSource {
         return JobClient.client.get(BASE_URL) {
             parameter("page", page)
             headers {
-                append(HttpHeaders.Accept,"*/*")
+               // append(HttpHeaders.Accept,"*/*")
             }
         }.body()
     }

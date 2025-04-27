@@ -17,13 +17,13 @@ fun AppNavHost(navController: NavHostController, innerPadding: PaddingValues) {
             JobListScreen(innerPadding = innerPadding, navController = navController)
         }
         composable(Screen.JobDetails.route) {
-            JobDetailsScreen()
+            JobDetailsScreen(innerPadding = innerPadding)
         }
         composable(Screen.Bookmarks.route) {
-            BookMarkScreen(navController = navController)
+            BookMarkScreen(navController = navController, innerPadding = innerPadding)
         }
         composable(Screen.BookmarkedJobDetails.route) {
-            BookMarkDetailsScreen()
+            BookMarkDetailsScreen(innerPadding = innerPadding)
         }
     }
 }

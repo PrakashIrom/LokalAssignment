@@ -15,11 +15,11 @@ import com.apui.lokalassignment.ui.home.JobListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun JobDetailsScreen(viewModel: JobListViewModel = koinViewModel()) {
+fun JobDetailsScreen(viewModel: JobListViewModel = koinViewModel(), innerPadding: androidx.compose.foundation.layout.PaddingValues) {
     val jobResponse = viewModel.selectedJob
     Column(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(innerPadding)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally

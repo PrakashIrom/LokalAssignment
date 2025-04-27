@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.apui.lokalassignment.data.model.JobEntity
 
-@Database(entities = [JobEntity::class], version = 3, exportSchema = false)
+@Database(entities = [JobEntity::class], version = 5, exportSchema = false)
 abstract class JobDatabase : RoomDatabase() {
 
     abstract fun jobDao(): JobDAO

@@ -25,7 +25,7 @@ class JobListViewModel(private val jobRepository: JobRepository) : ViewModel() {
     var selectedJob: JobResponse? by mutableStateOf(null)
         private set
 
-    private var currentPage = 1
+    private var currentPage = 2
 
     init {
         loadMorePage()

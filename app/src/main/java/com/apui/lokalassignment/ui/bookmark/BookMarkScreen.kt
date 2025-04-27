@@ -3,6 +3,7 @@ package com.apui.lokalassignment.ui.bookmark
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,10 +23,11 @@ import org.koin.compose.viewmodel.koinViewModel
 fun BookMarkScreen(
     viewModel: BookMarkViewModel = koinViewModel(),
     navController: NavHostController,
+    innerPadding: PaddingValues
 ) {
     val jobList = viewModel.jobList
 
-    LazyColumn {
+    LazyColumn(modifier = Modifier.padding(innerPadding)){
         items(jobList.size) { job ->
             JobItem(jobList[job], onClick = {
                 viewModel.selectJob(jobList[job])

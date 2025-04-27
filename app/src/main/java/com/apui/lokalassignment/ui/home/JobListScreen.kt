@@ -94,65 +94,66 @@ fun JobItem(
     }
     val coroutineScope = rememberCoroutineScope()
 
-    Card(modifier = Modifier
-        .padding(10.dp)
-        .clickable {
-            onClick()
-        }) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
+    if (job.id != null)
+        Card(modifier = Modifier
+            .padding(10.dp)
+            .clickable {
+                onClick()
+            }) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(job.title.toString())
-                Text(job.primary_details?.Place.toString())
-                Text(job.primary_details?.Salary.toString())
-                Text(job.whatsapp_no.toString())
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(job.title.toString())
+                    Text(job.primary_details?.Place.toString())
+                    Text(job.primary_details?.Salary.toString())
+                    Text(job.whatsapp_no.toString())
+                }
+
+                Icon(
+                    painter = painterResource(
+                        if (isBookMarked.value) R.drawable.bookmark_black else R.drawable.bookmark_white
+                    ),
+                    contentDescription = "Bookmark",
+                    modifier = Modifier
+                        .size(24.dp)
+                        .padding(start = 8.dp)
+                        .clickable {
+                            coroutineScope.launch {
+                                val jobEntity = JobEntity(
+                                    id = (job.id ?: UUID
+                                        .randomUUID()
+                                        .toString()).toString(),
+                                    title = job.title.toString(),
+                                    place = job.primary_details?.Place.toString(),
+                                    salary = job.primary_details?.Salary.toString(),
+                                    whatsapp_no = job.whatsapp_no.toString(),
+                                    company_name = job.company_name.toString(),
+                                    experience = job.primary_details?.Experience.toString(),
+                                    qualification = job.primary_details?.Qualification.toString(),
+                                    job_type = job.primary_details?.Job_Type.toString(),
+                                    job_role = job.job_role.toString(),
+                                    shift = job.contentV3?.V3?.find { it.field_key == "Shift timing" }?.field_value.toString(),
+                                    gender = job.contentV3?.V3?.find { it.field_key == "Gender" }?.field_value,
+                                    description = job.contentV3?.V3?.find { it.field_key == "Other details" }?.field_value
+                                )
+
+                                if (isBookMarked.value) {
+                                    bookMarkViewModel.deleteJob(jobEntity)
+                                } else {
+                                    bookMarkViewModel.insertJob(jobEntity)
+                                }
+                            }
+                            job.id.let { bookMarkPreferenceViewModel.toggleBookmark(it) }
+                        }
+                )
             }
 
-            Icon(
-                painter = painterResource(
-                    if (isBookMarked.value) R.drawable.bookmark_black else R.drawable.bookmark_white
-                ),
-                contentDescription = "Bookmark",
-                modifier = Modifier
-                    .size(24.dp)
-                    .padding(start = 8.dp)
-                    .clickable {
-                        coroutineScope.launch {
-                            val jobEntity = JobEntity(
-                                id = (job.id ?: UUID
-                                    .randomUUID()
-                                    .toString()).toString(),
-                                title = job.title.toString(),
-                                place = job.primary_details?.Place.toString(),
-                                salary = job.primary_details?.Salary.toString(),
-                                whatsapp_no = job.whatsapp_no.toString(),
-                                company_name = job.company_name.toString(),
-                                experience = job.primary_details?.Experience.toString(),
-                                qualification = job.primary_details?.Qualification.toString(),
-                                job_type = job.primary_details?.Job_Type.toString(),
-                                job_role = job.job_role.toString(),
-                                shift = job.contentV3?.V3?.find { it.field_key == "Shift timing" }?.field_value.toString(),
-                                gender = job.contentV3?.V3?.find { it.field_key == "Gender" }?.field_value,
-                                description = job.contentV3?.V3?.find { it.field_key == "Other details" }?.field_value
-                            )
-
-                            if (isBookMarked.value) {
-                                bookMarkViewModel.deleteJob(jobEntity)
-                            } else {
-                                bookMarkViewModel.insertJob(jobEntity)
-                            }
-                        }
-                        job.id?.let { bookMarkPreferenceViewModel.toggleBookmark(it) }
-                    }
-            )
         }
-
-    }
 }

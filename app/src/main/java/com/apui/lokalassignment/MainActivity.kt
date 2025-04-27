@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.apui.lokalassignment.ui.BottomBar
+import com.apui.lokalassignment.ui.TopBar
 import com.apui.lokalassignment.ui.navigation.AppNavHost
 import com.apui.lokalassignment.ui.theme.LokalAssignmentTheme
 
@@ -23,7 +24,9 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    bottomBar = { BottomBar(navController) }) { innerPadding ->
+                    bottomBar = { BottomBar(navController) },
+                    topBar = { TopBar(navController) }
+                    ) { innerPadding ->
                     AppNavHost(navController, innerPadding)
                 }
             }
